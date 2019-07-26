@@ -56,7 +56,7 @@ public class Server{
 			cnt++;
 			if( chk >= 4) break;
 		}
-System.out.println("[" + sb.toString() + "]");
+System.out.println("rcv[" + sb.toString() + "]");
 //		Request req = new Request();
 //		Data data = new Data();
 //		data.setValue(sb.toString());
@@ -64,19 +64,24 @@ System.out.println("[" + sb.toString() + "]");
 //		ObjectInputStream os = new ObjectInputStream(socket.getInputStream());
 //		Request req = (Request)os.readObject();
 //		return req;
-		String str = "<h1>Hello World3!!</h1>";
-		Calendar cal = Calendar.getInstance();
-		str += "<br/>";
-		str += cal.getTime().toString();
-
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-		bw.write("HTTP/1.1 200 OK" + "\r\n");
-		bw.write("Content-Type: text/html" + "\r\n");
-		bw.write("Connection: close" + "\r\n");
-		bw.write("Content-Length: "  + str.length()+"\r\n");
-		bw.write("\r\n");
-		bw.write(str);
-		bw.flush();
+		if(sb.toString().indexOf("favicon")>=0){
+			bw.write("HTTP/1.1 404 Not Found" + "\r\n");
+			bw.flush();
+		}else{
+			String str = "<h1>Hello World3!!</h1>";
+			Calendar cal = Calendar.getInstance();
+			str += "<br/>";
+			str += cal.getTime().toString();
+
+			bw.write("HTTP/1.1 200 OK" + "\r\n");
+			bw.write("Content-Type: text/html" + "\r\n");
+			bw.write("Connection: close" + "\r\n");
+			bw.write("Content-Length: "  + str.length()+"\r\n");
+			bw.write("\r\n");
+			bw.write(str);
+			bw.flush();
+		}
 	}
 	public void setPortNo(int port){
 		portNo = port;
