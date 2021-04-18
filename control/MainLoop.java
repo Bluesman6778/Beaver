@@ -20,7 +20,7 @@ public class MainLoop implements Runnable{
 		storage = s;
 	}
 	public void go(){
-		server = new Server(30051);
+		server = new Server(30052);
 		try{
 			server.open();
 		}catch(IOException ioe){
@@ -29,11 +29,10 @@ public class MainLoop implements Runnable{
 		int cnt=0;
 		while(be){
 			try{
-System.out.println("**1********************************************");
 				request = server.read();
-System.out.println("**2********************************************");
-				Thread t = new Thread(this);
-				t.start();
+				server.write("TEST");
+//				Thread t = new Thread(this);
+//				t.start();
 			}catch(IOException ioe){
 				ioe.printStackTrace();
 //				setExit();	
