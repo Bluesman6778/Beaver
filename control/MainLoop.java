@@ -30,15 +30,14 @@ public class MainLoop implements Runnable{
 		while(be){
 			try{
 				request = server.read();
-				server.write("TEST");
-//				Thread t = new Thread(this);
-//				t.start();
+				Thread t = new Thread(this);
+				t.start();
 			}catch(IOException ioe){
 				ioe.printStackTrace();
-//				setExit();	
+				setExit();	
 			}catch(ClassNotFoundException cnfe){
 				cnfe.printStackTrace();
-//				setExit();
+				setExit();
 			}
 			cnt++;
 		}

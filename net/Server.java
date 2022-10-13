@@ -37,20 +37,25 @@ public class Server{
 	}
 	public Request read() throws IOException,ClassNotFoundException{
 		socket = serverSocket.accept();
-		InputStream is = socket.getInputStream();
- 		InputStreamReader reader = new InputStreamReader(is);
-		while(reader.ready()){
-			System.out.print((char)reader.read());
-		}
 		return null;
 	}
 	public void write(String msg) throws IOException{
+		InputStream is = socket.getInputStream();
+ 		InputStreamReader reader = new InputStreamReader(is);
+		try{
+			Thread.sleep(100);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		while(reader.ready()){
+			System.out.print((char)reader.read());
+		}
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 		String str = "<h1>Hello World3!!</h1>";
 		Calendar cal = Calendar.getInstance();
 		str += "<br/>";
 		str += cal.getTime().toString();
-
+		str += "\r\n";
 		bw.write("HTTP/1.1 200 OK" + "\r\n");
 		bw.write("Content-Type: text/html" + "\r\n");
 		bw.write("Connection: close" + "\r\n");
