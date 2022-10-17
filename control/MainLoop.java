@@ -19,8 +19,8 @@ public class MainLoop implements Runnable{
 	public void setStorage(Storage s){
 		storage = s;
 	}
-	public void go(){
-		server = new Server(30052);
+	public void go(int portNo){
+		server = new Server(portNo);
 		try{
 			server.open();
 		}catch(IOException ioe){
